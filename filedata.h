@@ -8,34 +8,19 @@
 class FileData
 {
 public:
-    FileData(QString newPath){
-        QFileInfo file(newPath);
-        if (file.isDir()){
-            std::cout<<"size: ";
-            QDir dir(newPath);
-            name = dir.dirName();
-            type = "dir";
-            dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks); //устанавливаем фильтр выводимых файлов
-            dir.setSorting(QDir::Size | QDir::Reversed); //устанавливаем сортировку "от меньшего к большему"
-            QFileInfoList list = dir.entryInfoList(); //получаем список файлов директории
-            for (int i = 0; i < list.size(); ++i) {
-                size += list.at(i).size();
-            }
-        } else {
-            size = file.size();
-            name = file.fileName();
-            type = file.completeSuffix();
-        }
-        path=newPath;
+    FileData(QString newLabel, qint64 newSize){
+        label = newLabel;
+        size = newSize;
     }
     qint64 getSize(){
         return size;
     }
+    QString getLabel(){
+        return label;
+    }
 protected:
-    QString path = "";
     qint64 size = 0;
-    QString name = "";
-    QString type = "";
+    QString label = "";
 };
 
 #endif // FILEDATA_H
