@@ -3,7 +3,6 @@
 
 #include <calculete.h>
 #include <QDirIterator>
-#include <filedata.h>
 
 class CalculeteBySize : public Calculete
 {

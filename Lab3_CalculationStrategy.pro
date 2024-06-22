@@ -9,9 +9,9 @@ CONFIG += c++17 cmdline
 SOURCES += \
         calculete.cpp \
         calculetebysize.cpp \
+        calculetebysubdirs.cpp \
         calculetebytype.cpp \
         chartdata.cpp \
-        filedata.cpp \
         main.cpp
 
 # Default rules for deployment.
@@ -22,6 +22,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     calculete.h \
     calculetebysize.h \
+    calculetebysubdirs.h \
     calculetebytype.h \
-    chartdata.h \
-    filedata.h
+    chartdata.h

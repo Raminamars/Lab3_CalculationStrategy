@@ -1,18 +1,30 @@
 #include <QCoreApplication>
-#include<filedata.h>
 #include<iostream>
 #include <chartdata.h>
 #include <calculetebysize.h>
+#include <calculetebytype.h>
+#include <calculetebysubdirs.h>
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-    CalculeteBySize calc ;
-    QVector<ChartData> chartData = calc.calculeteByPath("C:/lab1ramina");
+    CalculeteBySize calculeteBySize;
+    CalculeteBySubDirs calculeteBySubDirs;
+    CalculeteByType calculeteByType;
+    QVector<ChartData> chartData = calculeteBySize.calculeteByPath("/lab1ramina");
+    std::cout << "--------------------------------------------by files size-------------------------------------" << std::endl;
     for (int i = 0; i< chartData.length();i++){
-        std::cout << chartData[i].getLabel().toStdString() << chartData[i].getProcentSize() << std::endl;
+        std::cout << chartData[i].getLabel().toStdString() << "   " << chartData[i].getProcentSize() << std::endl;
     }
-//    FileData file("C:/lab1ramina");
-//    std::cout << file.getSize();
+    std::cout << "--------------------------------------------by dirs size--------------------------------------" << std::endl;
+    chartData = calculeteBySubDirs.calculeteByPath("C:/Users/Ramina/Documents/Lab3_CalculationStrategy/lab1ramina");
+    for (int i = 0; i< chartData.length();i++){
+        std::cout << chartData[i].getLabel().toStdString() << "   " << chartData[i].getProcentSize() << std::endl;
+    }
+    std::cout << "--------------------------------------------by types size-------------------------------------" << std::endl;
+    chartData = calculeteByType.calculeteByPath("C:/Users/Ramina/Documents/Lab3_CalculationStrategy/lab1ramina");
+    for (int i = 0; i< chartData.length();i++){
+        std::cout << chartData[i].getLabel().toStdString() << "   " << chartData[i].getProcentSize() << std::endl;
+    }
     return a.exec();
 }
