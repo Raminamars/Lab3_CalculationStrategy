@@ -46,12 +46,30 @@ public:
                 // Группировка директорий и их размеров
                 dirGrouped[dirPath] += dirSize;
             }
+
+            QVector<QFileInfo> currentFileData;
+            QDirIterator itCurrent(path,QDir::Files);
+            while (itCurrent.hasNext()){
+                QFileInfo itFile(itCurrent.next());// Получение информации о следующем файле
+                // Проверка, что размер файла не равен нулю
+                if (itFile.size()!=0){
+                    currentFileData.push_back(itFile);// Добавление информации о файле в вектор
+                }
+            }
+            qint64 currentSize = 0;// Переменная для хранения общего размера поддиректории
+            // Подсчет общего размера всех файлов в поддиректории
+            for (int i = 0; i< currentFileData.length();i++){
+                currentSize += currentFileData[i].size();
+            }
+            // Группировка директорий и их размеров
+            dirGrouped["Current dir"] += currentSize;
+
+
             qint64 totalSize = 0;// Переменная для хранения общего размера всех поддиректорий
             // Подсчет общего размера всех поддиректорий
-             for (auto &item : dirGrouped){
+            for (auto &item : dirGrouped){
                 totalSize += item.second;
             }
-
             // Формирование данных для диаграммы с расчетом процентов размера каждой поддиректории
             for (auto &item : dirGrouped) {
                 chartData.push_back(ChartData(item.first,calculatePercentage(item.second,totalSize)));
