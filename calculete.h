@@ -11,7 +11,7 @@ public:
     Calculete()= default;
 
     // Виртуальный метод для расчета данных по указанному пути
-    virtual QVector<ChartData> calculeteByPath(QString path);
+    virtual QVector<ChartData> calculeteByPath(QString path)=0;
 
     // Метод для расчета процента от общего значения
     double calculatePercentage(qint64 value, qint64 total) {
